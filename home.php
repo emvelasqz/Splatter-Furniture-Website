@@ -366,7 +366,7 @@ $currentDateTime = date('F j, Y | g:i A');
             <div class="footer-brand">
                 <h2 class="windsong-logo">Splatter</h2>
                 <p>Crafting comfort, one piece at a time.</p>
-                <p>1st Street, Ballbogo, Angeles City, Pampanga, 2008, Philippines</p>
+                <p>1st Street, Balibago, Angeles City, Pampanga, 2008, Philippines</p>
                 <div class="footer-date-time"><?php echo $currentDateTime; ?></div>
             </div>
             <div class="footer-links">
