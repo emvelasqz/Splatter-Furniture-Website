@@ -560,7 +560,7 @@ $total = $subtotal - $discount - $coupon_discount;
         <div class="footer-brand">
             <h2>Splatter</h2>
             <p>Crafting comfort, one piece at a time.</p>
-            <p>1st Street, Ballbogo, Angeles City, Pampanga, 2008, Philippines</p>
+            <p>1st Street, Balibago, Angeles City, Pampanga, 2008, Philippines</p>
         </div>
         <div class="footer-links">
             <table>
