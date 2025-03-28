@@ -191,3 +191,5 @@ UPDATE inventory SET image = 'furni12.jpg' WHERE inventory_id = 47;
 **Final Steps**
 
 After completing these steps, the website should be fully functional. Enjoy!
+
+All images used in this website are from Castlery US.
