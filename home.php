@@ -31,7 +31,6 @@ $currentDateTime = date('F j, Y | g:i A');
                     <li><a href="blog.php">Blog</a></li>
                 </ul>
             </nav>
-            <div class="date-time"><?php echo $currentDateTime; ?></div>
             <div class="icons">
                 <a href="cart.php" class="icon-link">
                     <i class="fas fa-shopping-cart"></i>
@@ -358,11 +357,11 @@ $currentDateTime = date('F j, Y | g:i A');
 
     <footer class="footer">
         <div class="footer-content">
-        <div class="footer-brand">
-        <h2 class="windsong-logo">Splatter</h2>
+            <div class="footer-brand">
+                <h2 class="windsong-logo">Splatter</h2>
                 <p>Crafting comfort, one piece at a time.</p>
                 <p>1st Street, Ballbogo, Angeles City, Pampanga, 2008, Philippines</p>
-
+                <div class="footer-date-time"><?php echo $currentDateTime; ?></div>
             </div>
             <div class="footer-links">
                 <table>
