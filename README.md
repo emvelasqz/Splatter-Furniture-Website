@@ -11,7 +11,7 @@ Once XAMPP is installed, open it and start **APACHE** and **MYSQL**.
 
 For an easier way to create the database, click **SHELL** in the XAMPP control panel.
 
-**creating the Database**
+**Creating the Database**
 
 In the shell, type:
 mysql -u root
