@@ -336,24 +336,30 @@ $currentDateTime = date('F j, Y | g:i A');
     </section>
 
     <section class="instagram-section">
-        <div class="instagram-header">
-            <h2>#design</h2>
-            <a href="https://www.instagram.com/castleryus/" target="_blank" class="follow-us">
-                <i class="fab fa-instagram"></i> FOLLOW US ON INSTAGRAM
+    <div class="instagram-header">
+        <h2>#design</h2>
+        <a href="https://www.instagram.com/castleryus/" target="_blank" class="follow-us">
+            <i class="fab fa-instagram"></i> FOLLOW US ON INSTAGRAM
+        </a>
+    </div>
+    <div class="instagram-grid">
+        <div class="instagram-item">
+            <a href="https://www.instagram.com/castleryus/" target="_blank">
+                <img src="home-post4.jpg" alt="Instagram Post 1">
             </a>
         </div>
-        <div class="instagram-grid">
-            <div class="instagram-item">
-                <img src="home-post4.jpg" alt="Instagram Post 1">
-            </div>
-            <div class="instagram-item">
+        <div class="instagram-item">
+            <a href="https://www.instagram.com/castleryus/" target="_blank">
                 <img src="home-post2.jpg" alt="Instagram Post 2">
-            </div>
-            <div class="instagram-item">
-                <img src="home-post3.jpg" alt="Instagram Post 3">
-            </div>
+            </a>
         </div>
-    </section>
+        <div class="instagram-item">
+            <a href="https://www.instagram.com/castleryus/" target="_blank">
+                <img src="home-post3.jpg" alt="Instagram Post 3">
+            </a>
+        </div>
+    </div>
+</section>
 
     <footer class="footer">
         <div class="footer-content">
