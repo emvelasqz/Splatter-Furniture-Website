@@ -18,18 +18,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = trim($_POST["email"]);
     $password = $_POST["password"];
 
-    $stmt = $mysqli->prepare("SELECT SignupID, FirstName, LastName FROM signup WHERE Email = ? AND Password = ?");
+    $stmt = $mysqli->prepare("SELECT signupid, firstname, lastname FROM signup WHERE email = ? AND password = ?");
     if ($stmt) {
         $stmt->bind_param("ss", $email, $password);
         $stmt->execute();
         $stmt->store_result();
 
         if ($stmt->num_rows > 0) {
-            $stmt->bind_result($signupID, $firstName, $lastName);
+            $stmt->bind_result($signupid, $firstname, $lastname);
             $stmt->fetch();
-            $_SESSION["signupID"] = $signupID;
-            $_SESSION["firstName"] = $firstName;
-            $_SESSION["lastName"] = $lastName;
+            $_SESSION["signupid"] = $signupid;
+            $_SESSION["firstname"] = $firstname;
+            $_SESSION["lastname"] = $lastname;
             header("Location: home.php");
             exit();
         } else {
