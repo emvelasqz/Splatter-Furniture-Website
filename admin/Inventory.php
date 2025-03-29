@@ -13,7 +13,7 @@ if ($mysqli->connect_error) {
 // Handle the Delete Item Logic
 if (isset($_GET['delete_id'])) {
     $delete_id = $_GET['delete_id'];
-    $delete_sql = "DELETE FROM Inventory WHERE inventory_id = ?";
+    $delete_sql = "DELETE FROM inventory WHERE inventory_id = ?";
     $stmt = $mysqli->prepare($delete_sql);
     $stmt->bind_param("i", $delete_id);
     if ($stmt->execute()) {
@@ -28,13 +28,13 @@ if (isset($_GET['delete_id'])) {
 $searchQuery = '';
 if (isset($_GET['search']) && !empty($_GET['search'])) {
     $searchQuery = $_GET['search'];
-    $sql = "SELECT * FROM Inventory WHERE name LIKE ? OR category LIKE ?";
+    $sql = "SELECT * FROM inventory WHERE name LIKE ? OR category LIKE ?";
     $stmt = $mysqli->prepare($sql);
     $searchTerm = "%" . $searchQuery . "%"; // Use wildcard to match partial terms
     $stmt->bind_param("ss", $searchTerm, $searchTerm);
 } else {
     // If no search query, fetch all items
-    $sql = "SELECT * FROM Inventory";
+    $sql = "SELECT * FROM inventory";
     $stmt = $mysqli->prepare($sql);
 }
 
