@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $stmt = $mysqli->prepare("INSERT INTO signup (firstname, lastname, email, password, contactnumber) VALUES (?, ?, ?, ?, ?)");
         if ($stmt) {
-            $stmt->bind_param("sssss", $firstName, $lastName, $email, $password, $phone);
+            $stmt->bind_param("sssss", $firstname, $lastname, $email, $password, $phone);
             if ($stmt->execute()) {
                 $success = "Account created successfully!";
             } else {
