@@ -18,7 +18,7 @@ if (isset($_GET['query'])) {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "SELECT * FROM Inventory WHERE name LIKE ? OR supplier LIKE ? OR category LIKE ?";
+    $sql = "SELECT * FROM inventory WHERE name LIKE ? OR supplier LIKE ? OR category LIKE ?";
     $stmt = $conn->prepare($sql);
     if (!$stmt) {
         die("Query preparation failed: " . $conn->error);
