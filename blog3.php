@@ -104,7 +104,7 @@ No matter what your style or budget, there is a modern sofa design that is perfe
     <div class="footer-brand">
     <h2 class="windsong-logo">Splatter</h2>
             <p>Crafting comfort, one piece at a time.</p>
-            <p>1st Street, Ballbogo, Angeles City, Pampanga, 2008, Philippines</p>
+            <p>1st Street, Balibago, Angeles City, Pampanga, 2008, Philippines</p>
 
         </div>
         <div class="footer-links">
