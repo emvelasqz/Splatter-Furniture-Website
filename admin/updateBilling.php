@@ -20,7 +20,7 @@ $billingID = $_GET['id'] ?? 0;
 $billing = null; // Ensure $billing is defined before the query
 
 if ($billingID > 0) {
-    $sql = "SELECT * FROM Billing WHERE BillingID = ?";
+    $sql = "SELECT * FROM billing WHERE billingid = ?";
     $stmt = $mysqli->prepare($sql);
     $stmt->bind_param('i', $billingID);
     $stmt->execute();
@@ -30,19 +30,19 @@ if ($billingID > 0) {
 
 // Handle the form submission to update the record
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $billing) {
-    $firstName = $_POST['firstName'];
-    $lastName = $_POST['lastName'];
+    $firstName = $_POST['firstname'];
+    $lastName = $_POST['lastname'];
     $contact = $_POST['contact'];
     $country = $_POST['country'];
     $address = $_POST['address'];
     $town = $_POST['town'];
     $province = $_POST['province'];
-    $zipCode = $_POST['zipCode'];
+    $zipCode = $_POST['zipcode'];
     $email = $_POST['email'];
-    $productName = $_POST['productName']; // Assuming you want to include this
+    $productName = $_POST['productname']; // Assuming you want to include this
     $quantity = $_POST['quantity']; // Assuming you want to include this
 
-    $updateSQL = "UPDATE Billing SET FirstName=?, LastName=?, Contact=?, Country=?, Address=?, Town=?, Province=?, ZipCode=?, Email=?, ProductName=?, Quantity=? WHERE BillingID=?";
+    $updateSQL = "UPDATE billing SET firstname=?, lastname=?, contact=?, country=?, address=?, town=?, province=?, zipcode=?, email=?, productname=?, quantity=? WHERE billing=?";
     $stmt = $mysqli->prepare($updateSQL);
     $stmt->bind_param('sssssssssssi', $firstName, $lastName, $contact, $country, $address, $town, $province, $zipCode, $email, $productName, $quantity, $billingID);
     $stmt->execute();
@@ -260,37 +260,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $billing) {
     <?php if ($billing): ?>
         <form method="POST">
             <label for="firstName">First Name</label>
-            <input type="text" name="firstName" value="<?php echo htmlspecialchars($billing['FirstName']); ?>" required><br>
+            <input type="text" name="firstName" value="<?php echo htmlspecialchars($billing['firstname']); ?>" required><br>
 
             <label for="lastName">Last Name</label>
-            <input type="text" name="lastName" value="<?php echo htmlspecialchars($billing['LastName']); ?>" required><br>
+            <input type="text" name="lastName" value="<?php echo htmlspecialchars($billing['lastname']); ?>" required><br>
 
             <label for="contact">Contact</label>
-            <input type="text" name="contact" value="<?php echo htmlspecialchars($billing['Contact']); ?>" required><br>
+            <input type="text" name="contact" value="<?php echo htmlspecialchars($billing['contact']); ?>" required><br>
 
             <label for="country">Country</label>
-            <input type="text" name="country" value="<?php echo htmlspecialchars($billing['Country']); ?>" required><br>
+            <input type="text" name="country" value="<?php echo htmlspecialchars($billing['country']); ?>" required><br>
 
             <label for="address">Address</label>
-            <input type="text" name="address" value="<?php echo htmlspecialchars($billing['Address']); ?>" required><br>
+            <input type="text" name="address" value="<?php echo htmlspecialchars($billing['address']); ?>" required><br>
 
             <label for="town">Town</label>
-            <input type="text" name="town" value="<?php echo htmlspecialchars($billing['Town']); ?>" required><br>
+            <input type="text" name="town" value="<?php echo htmlspecialchars($billing['town']); ?>" required><br>
 
             <label for="province">Province</label>
-            <input type="text" name="province" value="<?php echo htmlspecialchars($billing['Province']); ?>" required><br>
+            <input type="text" name="province" value="<?php echo htmlspecialchars($billing['province']); ?>" required><br>
 
             <label for="zipCode">Zip Code</label>
-            <input type="text" name="zipCode" value="<?php echo htmlspecialchars($billing['ZipCode']); ?>" required><br>
+            <input type="text" name="zipCode" value="<?php echo htmlspecialchars($billing['zipcode']); ?>" required><br>
 
             <label for="email">Email</label>
-            <input type="email" name="email" value="<?php echo htmlspecialchars($billing['Email']); ?>" required><br>
+            <input type="email" name="email" value="<?php echo htmlspecialchars($billing['email']); ?>" required><br>
 
             <label for="productName">Product Name</label>
-            <input type="text" name="productName" value="<?php echo htmlspecialchars($billing['ProductName']); ?>" required><br>
+            <input type="text" name="productName" value="<?php echo htmlspecialchars($billing['productname']); ?>" required><br>
 
             <label for="quantity">Quantity</label>
-            <input type="text" name="quantity" value="<?php echo htmlspecialchars($billing['Quantity']); ?>" required><br>
+            <input type="text" name="quantity" value="<?php echo htmlspecialchars($billing['quantity']); ?>" required><br>
 
             <button type="submit" class="button">Update</button>
         </form>
