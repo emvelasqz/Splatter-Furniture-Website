@@ -37,7 +37,7 @@ $currentDateTime = date('F j, Y | g:i A');
                 </a>
                 <?php if(isset($_SESSION["signupID"])) { ?>
                     <div class="logged-in">
-                        Welcome, <?php echo htmlspecialchars($_SESSION["firstName"]); ?>! 
+                        Welcome, <?php echo htmlspecialchars($_SESSION["firstname"]); ?>! 
                         <a href="logout.php" class="logout-link">Logout</a>
                     </div>
                 <?php } else { ?>
