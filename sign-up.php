@@ -2,7 +2,7 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-$host = 'splatter.folded.cloud';
+$host = 'localhost';
 $user = 'root'; 
 $pass = '';     
 $db   = 'hau_store'; 
