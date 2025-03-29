@@ -20,7 +20,7 @@ $session_id = session_id();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['remove_item'])) {
         $product_id = $_POST['product_id'];
-        $delete_query = "DELETE FROM CartItems WHERE ProductID = :product_id AND SessionID = :session_id";
+        $delete_query = "DELETE FROM cartitems WHERE productid = :product_id AND sessionid = :session_id";
         $delete_stmt = $conn->prepare($delete_query);
         $delete_stmt->bindParam(':product_id', $product_id);
         $delete_stmt->bindParam(':session_id', $session_id);
@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-$query = "SELECT * FROM CartItems WHERE SessionID = :session_id";
+$query = "SELECT * FROM cartiems WHERE sessionid = :session_id";
 $stmt = $conn->prepare($query);
 $stmt->bindParam(':session_id', $session_id);
 $stmt->execute();
@@ -217,14 +217,14 @@ $cart_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <?php if (count($cart_items) > 0): ?>
                         <?php foreach ($cart_items as $item): ?>
                             <tr>
-                                <td><?= htmlspecialchars($item['CartItemID']) ?></td>
-                                <td><?= htmlspecialchars($item['ProductName']) ?></td>
-                                <td>₱<?= number_format($item['Price'], 2) ?></td>
+                                <td><?= htmlspecialchars($item['cartitemid']) ?></td>
+                                <td><?= htmlspecialchars($item['productname']) ?></td>
+                                <td>₱<?= number_format($item['price'], 2) ?></td>
                                 <td>
-                                    <input type="number" value="<?= htmlspecialchars($item['Quantity']) ?>" min="1" readonly>
+                                    <input type="number" value="<?= htmlspecialchars($item['quantity']) ?>" min="1" readonly>
                                 </td>
-                                <td>₱<?= number_format($item['Price'] * $item['Quantity'], 2) ?></td>
-                                <td><?= htmlspecialchars($item['SessionID']) ?></td> <!-- Displaying Session ID -->
+                                <td>₱<?= number_format($item['price'] * $item['quantity'], 2) ?></td>
+                                <td><?= htmlspecialchars($item['sessionid']) ?></td> <!-- Displaying Session ID -->
                                 <td>
                                     <form method="POST" style="display: inline;">
                                         <input type="hidden" name="product_id" value="<?= $item['ProductID'] ?>">
@@ -243,7 +243,7 @@ $cart_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
         <?php
         $total_price_array = array_map(function ($item) {
-            return $item['Price'] * $item['Quantity'];
+            return $item['price'] * $item['quantity'];
         }, $cart_items);
         $total_price = array_sum($total_price_array);
         ?>
