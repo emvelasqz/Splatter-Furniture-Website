@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $category = $_POST['category'];  // Get category from the form
 
     // Prepare the SQL query
-    $sql = "INSERT INTO Inventory (name, stocks, supplier, price, category) VALUES (?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO inventory (name, stocks, supplier, price, category) VALUES (?, ?, ?, ?, ?)";
     $stmt = $mysqli->prepare($sql);
     // Corrected the bind_param to account for all five parameters
     $stmt->bind_param("sisss", $name, $stocks, $supplier, $price, $category); // 'sisss' for (string, integer, string, double, string)
