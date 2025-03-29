@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($password !== $confirmPassword) {
         $error = "Passwords do not match.";
     } else {
-        $stmt = $mysqli->prepare("INSERT INTO Signup (FirstName, LastName, Email, Password, ContactNumber) VALUES (?, ?, ?, ?, ?)");
+        $stmt = $mysqli->prepare("INSERT INTO signup (FirstName, LastName, Email, Password, ContactNumber) VALUES (?, ?, ?, ?, ?)");
         if ($stmt) {
             $stmt->bind_param("sssss", $firstName, $lastName, $email, $password, $phone);
             if ($stmt->execute()) {
