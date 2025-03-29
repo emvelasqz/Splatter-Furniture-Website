@@ -13,12 +13,12 @@ if ($mysqli->connect_error) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $firstName = trim($_POST["first-name"]);
-    $lastName = trim($_POST["last-name"]);
+    $firstname = trim($_POST["first-name"]);
+    $lastname = trim($_POST["last-name"]);
     $email = trim($_POST["email"]);
     $phone = trim($_POST["phone"]);
     $password = $_POST["password"];
-    $confirmPassword = $_POST["confirm-password"];
+    $confirmpassword = $_POST["confirm-password"];
 
     if ($password !== $confirmPassword) {
         $error = "Passwords do not match.";
