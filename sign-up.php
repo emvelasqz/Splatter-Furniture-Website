@@ -2,7 +2,7 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-$host = 'localhost';
+$host = 'splatter.folded.cloud';
 $user = 'root'; 
 $pass = '';     
 $db   = 'hau_store'; 
@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST["password"];
     $confirmpassword = $_POST["confirm-password"];
 
-    if ($password !== $confirmPassword) {
+    if ($password !== $confirmpassword) {
         $error = "Passwords do not match.";
     } else {
         $stmt = $mysqli->prepare("INSERT INTO signup (firstname, lastname, email, password, contactnumber) VALUES (?, ?, ?, ?, ?)");
