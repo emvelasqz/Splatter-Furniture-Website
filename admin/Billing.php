@@ -14,7 +14,7 @@ if ($mysqli->connect_error) {
 
 // Fetch the session ID from the CartItems table
 $session_id = session_id();
-$session_query = "SELECT SessionID FROM CartItems WHERE SessionID = ?";
+$session_query = "SELECT sessionid FROM cartitems WHERE sessionid = ?";
 $stmt = $mysqli->prepare($session_query);
 $stmt->bind_param('s', $session_id);
 $stmt->execute();
@@ -32,7 +32,7 @@ $stmt->close();
 $search = '';
 if (isset($_GET['search'])) {
     $search = $_GET['search'];
-    $sql = "SELECT * FROM billing WHERE FirstName LIKE ? OR LastName LIKE ? OR Contact LIKE ? OR Country LIKE ? OR Address LIKE ? OR Town LIKE ? OR Province LIKE ? OR ZipCode LIKE ? OR Email LIKE ?";
+    $sql = "SELECT * FROM billing WHERE firstname LIKE ? OR lastname LIKE ? OR contact LIKE ? OR country LIKE ? OR address LIKE ? OR town LIKE ? OR province LIKE ? OR zipCode LIKE ? OR email LIKE ?";
     $stmt = $mysqli->prepare($sql);
     $search_term = '%' . $search . '%';
     $stmt->bind_param('sssssssss', $search_term, $search_term, $search_term, $search_term, $search_term, $search_term, $search_term, $search_term, $search_term);
@@ -46,7 +46,7 @@ if (isset($_GET['search'])) {
 // Handle deletion
 if (isset($_GET['delete'])) {
     $billingID = $_GET['delete'];
-    $deleteSQL = "DELETE FROM billing WHERE BillingID = ?";
+    $deleteSQL = "DELETE FROM billing WHERE billingid = ?";
     $stmt = $mysqli->prepare($deleteSQL);
     $stmt->bind_param('i', $billingID);
     $stmt->execute();
@@ -55,24 +55,24 @@ if (isset($_GET['delete'])) {
 
 // Handling Data Insertion:
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['insert'])) {
-    $firstName = $_POST['firstName'];
-    $lastName = $_POST['lastName'];
+    $firstName = $_POST['firstname'];
+    $lastName = $_POST['lastname'];
     $contact = $_POST['contact'];
     $country = $_POST['country'];
     $address = $_POST['address'];
     $town = $_POST['town'];
     $province = $_POST['province'];
-    $zipCode = $_POST['zipCode'];
+    $zipCode = $_POST['zipcode'];
     $email = $_POST['email'];
-    $totalPrice = $_POST['totalPrice']; // Assuming you have a total price input
-    $productName = $_POST['productName']; // New field for product name
+    $totalPrice = $_POST['totalprice']; // Assuming you have a total price input
+    $productName = $_POST['productname']; // New field for product name
     $quantity = $_POST['quantity']; // New field for quantity
 
     // Insert the data into the Billing table
-    $sql = "INSERT INTO billing (FirstName, LastName, Contact, Country, Address, Town, Province, ZipCode, Email, TotalPrice, ProductName, Quantity) 
+    $sql = "INSERT INTO billing (firstname, lastname, contact, country, address, town, province, zipcode, email, totalprice, productname, quantity) 
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = $mysqli->prepare($sql);
-    $stmt->bind_param('ssssssssdssd', $firstName, $lastName, $contact, $country, $address, $town, $province, $zipCode, $email, $totalPrice, $productName, $quantity);
+    $stmt->bind_param('ssssssssdssd', $firstname, $lastname, $contact, $country, $address, $town, $province, $zipcode, $email, $totalprice, $productname, $quantity);
     $stmt->execute();
 
     // Redirect to reload the page
@@ -278,24 +278,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['insert'])) {
             if ($result && $result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     echo "<tr>";
-                    echo "<td>" . htmlspecialchars($row['BillingID']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['FirstName']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['LastName']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['Contact']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['Country']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['Address']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['Town']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['Province']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['ZipCode']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['Email']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['TotalPrice']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['ProductName']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['Quantity']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['billingid']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['firstname']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['lastname']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['contact']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['country']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['address']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['town']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['province']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['zipcode']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['email']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['totalprice']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['productname']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['quantity']) . "</td>";
                     echo "<td>" . htmlspecialchars($session_id) . "</td>"; // Displaying the Session ID
                     echo "<td style='text-align:center;'>
-                        <a href='viewBilling.php?id=" . $row['BillingID'] . "' class='button button1'>View</a>
-                        <a href='updateBilling.php?id=" . $row['BillingID'] . "' class='button button1'>Update</a>
-                        <a href='Billing.php?delete=" . $row['BillingID'] . "' class='button button1' onclick='return confirm(\"Are you sure you want to delete this record?\")'>Delete</a>
+                        <a href='viewBilling.php?id=" . $row['billingid'] . "' class='button button1'>View</a>
+                        <a href='updateBilling.php?id=" . $row['billingid'] . "' class='button button1'>Update</a>
+                        <a href='Billing.php?delete=" . $row['billingid'] . "' class='button button1' onclick='return confirm(\"Are you sure you want to delete this record?\")'>Delete</a>
                     </td>";
                     echo "</tr>";
                 }
