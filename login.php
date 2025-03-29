@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = trim($_POST["email"]);
     $password = $_POST["password"];
 
-    $stmt = $mysqli->prepare("SELECT SignupID, FirstName, LastName FROM Signup WHERE Email = ? AND Password = ?");
+    $stmt = $mysqli->prepare("SELECT SignupID, FirstName, LastName FROM signup WHERE Email = ? AND Password = ?");
     if ($stmt) {
         $stmt->bind_param("ss", $email, $password);
         $stmt->execute();
