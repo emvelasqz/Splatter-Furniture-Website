@@ -15,7 +15,7 @@ if (isset($_GET['inventory_id'])) {
     $inventory_id = $_GET['inventory_id'];
 
     // Fetch the current data for the item
-    $sql = "SELECT * FROM Inventory WHERE inventory_id = ?";
+    $sql = "SELECT * FROM inventory WHERE inventory_id = ?";
     $stmt = $mysqli->prepare($sql);
     $stmt->bind_param("i", $inventory_id);
     $stmt->execute();
@@ -31,7 +31,7 @@ if (isset($_GET['inventory_id'])) {
         $category = $_POST['category'];
 
         // Update the item in the database
-        $update_sql = "UPDATE Inventory SET name = ?, stocks = ?, supplier = ?, price = ?, category = ? WHERE inventory_id = ?";
+        $update_sql = "UPDATE inventory SET name = ?, stocks = ?, supplier = ?, price = ?, category = ? WHERE inventory_id = ?";
         $update_stmt = $mysqli->prepare($update_sql);
         $update_stmt->bind_param("sisdsi", $name, $stocks, $supplier, $price, $category, $inventory_id);
 
