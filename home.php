@@ -89,7 +89,7 @@ $currentDateTime = date('F j, Y | g:i A');
         <p>Explore our curated collection of stylish, high-quality furniture designed to enhance any space, blending comfort, functionality, and timeless elegance.</p>
         <div class="category-links">
             <a href="Sofas.php" class="category-item">
-                <img src="Sofa11.jpg" alt="Dining">
+                <img src="dining.png" alt="Dining">
                 <h3>Sofas</h3>
             </a>
             <a href="Chairs.php" class="category-item">
