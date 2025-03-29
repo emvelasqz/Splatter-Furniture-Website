@@ -72,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkout'])) {
     $session_id = session_id(); // Get the current session ID
 
     foreach ($_SESSION['cart'] as $product_id => $item) {
-        $stmt = $pdo->prepare("INSERT INTO CartItems (SessionID, ProductID, ProductName, Quantity, Price, ImagePath) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt = $pdo->prepare("INSERT INTO cartitems (sessionid, productid, productname, quantity, price, imagepath) VALUES (?, ?, ?, ?, ?, ?)");
         $stmt->execute([$session_id, $product_id, $item['name'], $item['quantity'], $item['price'], $item['image']]);
     }
 
