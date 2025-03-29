@@ -13,7 +13,7 @@ if ($mysqli->connect_error) {
 $billingID = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 
 if ($billingID > 0) {
-    $sql = "SELECT * FROM Billing WHERE BillingID = ?";
+    $sql = "SELECT * FROM billing WHERE billingid = ?";
     $stmt = $mysqli->prepare($sql);
     $stmt->bind_param('i', $billingID);
     $stmt->execute();
@@ -198,51 +198,51 @@ tr:hover td {
             <table style="width:100%;">
                 <tr>
                     <th>Billing ID</th>
-                    <td><?php echo htmlspecialchars($billing['BillingID']); ?></td>
+                    <td><?php echo htmlspecialchars($billing['billingid']); ?></td>
                 </tr>
                 <tr>
                     <th>First Name</th>
-                    <td><?php echo htmlspecialchars($billing['FirstName']); ?></td>
+                    <td><?php echo htmlspecialchars($billing['firstname']); ?></td>
                 </tr>
                 <tr>
                     <th>Last Name</th>
-                    <td><?php echo htmlspecialchars($billing['LastName']); ?></td>
+                    <td><?php echo htmlspecialchars($billing['lastname']); ?></td>
                 </tr>
                 <tr>
                     <th>Contact</th>
-                    <td><?php echo htmlspecialchars($billing['Contact']); ?></td>
+                    <td><?php echo htmlspecialchars($billing['contact']); ?></td>
                 </tr>
                 <tr>
                     <th>Country</th>
-                    <td><?php echo htmlspecialchars($billing['Country']); ?></td>
+                    <td><?php echo htmlspecialchars($billing['country']); ?></td>
                 </tr>
                 <tr>
                     <th>Address</th>
-                    <td><?php echo htmlspecialchars($billing['Address']); ?></td>
+                    <td><?php echo htmlspecialchars($billing['address']); ?></td>
                 </tr>
                 <tr>
                     <th>Town</th>
-                    <td><?php echo htmlspecialchars($billing['Town']); ?></td>
+                    <td><?php echo htmlspecialchars($billing['town']); ?></td>
                 </tr>
                 <tr>
                     <th>Province</th>
-                    <td><?php echo htmlspecialchars($billing['Province']); ?></td>
+                    <td><?php echo htmlspecialchars($billing['province']); ?></td>
                 </tr>
                 <tr>
                     <th>Zip Code</th>
-                    <td><?php echo htmlspecialchars($billing['ZipCode']); ?></td>
+                    <td><?php echo htmlspecialchars($billing['zipcode']); ?></td>
                 </tr>
                 <tr>
                     <th>Email</th>
-                    <td><?php echo htmlspecialchars($billing['Email']); ?></td>
+                    <td><?php echo htmlspecialchars($billing['email']); ?></td>
                 </tr>
                 <tr>
                     <th>Product Name</th>
-                    <td><?php echo htmlspecialchars($billing['ProductName']); ?></td>
+                    <td><?php echo htmlspecialchars($billing['productname']); ?></td>
                 </tr>
                 <tr>
                     <th>Quantity</th>
-                    <td><?php echo htmlspecialchars($billing['Quantity']); ?></td>
+                    <td><?php echo htmlspecialchars($billing['quantity']); ?></td>
                 </tr>
             </table>
         </div>
