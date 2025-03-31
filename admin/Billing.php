@@ -32,7 +32,7 @@ $stmt->close();
 $search = '';
 if (isset($_GET['search'])) {
     $search = $_GET['search'];
-    $sql = "SELECT * FROM billing WHERE firstname LIKE ? OR lastname LIKE ? OR contact LIKE ? OR country LIKE ? OR address LIKE ? OR town LIKE ? OR province LIKE ? OR zipCode LIKE ? OR email LIKE ?";
+    $sql = "SELECT * FROM billing WHERE FirstName LIKE ? OR LastName LIKE ? OR Contact LIKE ? OR Country LIKE ? OR Address LIKE ? OR Town LIKE ? OR Province LIKE ? OR ZipCode LIKE ? OR Email LIKE ?";
     $stmt = $mysqli->prepare($sql);
     $search_term = '%' . $search . '%';
     $stmt->bind_param('sssssssss', $search_term, $search_term, $search_term, $search_term, $search_term, $search_term, $search_term, $search_term, $search_term);
@@ -46,7 +46,7 @@ if (isset($_GET['search'])) {
 // Handle deletion
 if (isset($_GET['delete'])) {
     $billingID = $_GET['delete'];
-    $deleteSQL = "DELETE FROM billing WHERE billingid = ?";
+    $deleteSQL = "DELETE FROM billing WHERE BillingID = ?";
     $stmt = $mysqli->prepare($deleteSQL);
     $stmt->bind_param('i', $billingID);
     $stmt->execute();
@@ -55,24 +55,24 @@ if (isset($_GET['delete'])) {
 
 // Handling Data Insertion:
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['insert'])) {
-    $firstName = $_POST['firstname'];
-    $lastName = $_POST['lastname'];
+    $firstName = $_POST['firstName'];
+    $lastName = $_POST['lastName'];
     $contact = $_POST['contact'];
     $country = $_POST['country'];
     $address = $_POST['address'];
     $town = $_POST['town'];
     $province = $_POST['province'];
-    $zipCode = $_POST['zipcode'];
+    $zipCode = $_POST['zipCode'];
     $email = $_POST['email'];
-    $totalPrice = $_POST['totalprice']; // Assuming you have a total price input
-    $productName = $_POST['productname']; // New field for product name
+    $totalPrice = $_POST['totalPrice']; // Assuming you have a total price input
+    $productName = $_POST['productName']; // New field for product name
     $quantity = $_POST['quantity']; // New field for quantity
 
     // Insert the data into the Billing table
-    $sql = "INSERT INTO billing (firstname, lastname, contact, country, address, town, province, zipcode, email, totalprice, productname, quantity) 
+    $sql = "INSERT INTO billing (FirstName, LastName, Contact, Country, Address, Town, Province, ZipCode, Email, TotalPrice, ProductName, Quantity) 
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = $mysqli->prepare($sql);
-    $stmt->bind_param('ssssssssdssd', $firstname, $lastname, $contact, $country, $address, $town, $province, $zipcode, $email, $totalprice, $productname, $quantity);
+    $stmt->bind_param('ssssssssdssd', $firstName, $lastName, $contact, $country, $address, $town, $province, $zipCode, $email, $totalPrice, $productName, $quantity);
     $stmt->execute();
 
     // Redirect to reload the page
@@ -86,157 +86,175 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['insert'])) {
 <head>
     <link rel="stylesheet" href="header.css">
     <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f8f3ed;
-            margin: 0;
-            padding: 0;
-            color: #5a4032;
-        }
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #f8f3ed;
+        margin: 0;
+        padding: 0;
+        color: #5a4032;
+    }
 
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 200px;
+        background-color: #8F7358;
+        height: 100%;
+        position: fixed;
+        overflow: auto;
+    }
+
+    li a {
+        display: block;
+        color: white;
+        padding: 14px;
+        text-decoration: none;
+        font-size: 16px;
+        font-family: 'Poppins', sans-serif;
+        transition: background-color 0.3s ease;
+    }
+
+    li a:hover {
+        background-color: #B09D89;
+    }
+
+    .RightSide {
+        margin-left: 220px;
+        padding: 20px;
+        background-color: #f8f3ed;
+        height: 100%;
+    }
+
+    .RightSide h1 {
+        color: #5a4032;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .button {
+        background-color: #5E4736;
+        border: none;
+        color: white;
+        padding: 8px 12px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 14px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        font-family: 'Poppins', sans-serif;
+        margin: 2px;
+    }
+
+    .button:hover {
+        background-color: #8F7358;
+    }
+
+    .button1 {
+        background-color: white;
+        color: #5E4736;
+        border: 2px solid #5E4736;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .button1:hover {
+        background-color: #f4f1eb;
+        color: #5E4736;
+    }
+
+    .InfoTable {
+        margin-top: 20px;
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: white;
+        box-shadow: 0 2px 5px rgba(94, 71, 54, 0.1);
+    }
+
+    table, th, td {
+        border: 1px solid #98724B;
+        text-align: left;
+        padding: 8px;
+    }
+
+    td {
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    th {
+        background-color: #5E4736;
+        color: white;
+        font-family: 'Poppins', sans-serif;
+        text-align: center;
+        padding: 12px 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f4f1eb;
+    }
+
+    tr:hover {
+        background-color: #e6dfd4;
+    }
+
+    .search-input {
+        font-size: 16px;
+        padding: 8px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        width: 250px;
+        border-radius: 4px;
+        border: 1px solid #98724B;
+        display: inline-block;
+        margin-left: 10px;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .action-buttons {
+        white-space: nowrap;
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+    }
+
+    @media (max-width: 768px) {
         ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            width: 200px;
-            background-color: #8F7358;
-            height: 100%;
-            position: fixed;
-            overflow: auto;
-        }
-
-        li a {
-            display: block;
-            color: white;
-            padding: 14px;
-            text-decoration: none;
-            font-size: 16px;
-            font-family: 'Poppins', sans-serif;
-            transition: background-color 0.3s ease;
-        }
-
-        li a:hover {
-            background-color: #B09D89;
+            width: 100%;
+            height: auto;
+            position: static;
         }
 
         .RightSide {
-            margin-left: 220px;
-            padding: 20px;
-            background-color: #f8f3ed;
-            height: 100%;
-        }
-
-        .RightSide h1 {
-            color: #5a4032;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .button {
-            background-color: #5E4736;
-            border: none;
-            color: white;
-            padding: 12px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .button:hover {
-            background-color: #8F7358;
-        }
-
-        .button1 {
-            background-color: white;
-            color: #5E4736;
-            border: 2px solid #5E4736;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .button1:hover {
-            background-color: #f4f1eb;
-            color: #5E4736;
-        }
-
-        .InfoTable {
-            margin-top: 20px;
-            width: 100%;
-            overflow-x: auto;
+            margin-left: 0;
+            padding: 10px;
         }
 
         table {
-            width: 100%;
-            border-collapse: collapse;
-            background-color: white;
-            box-shadow: 0 2px 5px rgba(94, 71, 54, 0.1);
-        }
-
-        table, th, td {
-            border: 1px solid #98724B;
-            text-align: left;
-            padding: 8px;
-        }
-
-    td {
-        text-align: center; /* Center all table content */
-    }
-
-
-        th {
-            background-color: #5E4736;
-            color: white;
-            font-family: 'Poppins', sans-serif;
-            text-align: center; /* Center table headers */
-
-        }
-
-        tr:nth-child(even) {
-            background-color: #f4f1eb;
-        }
-
-        tr:hover {
-            background-color: #e6dfd4;
+            font-size: 14px;
         }
 
         .search-input {
-            font-size: 16px;
-            padding: 8px;
+            width: 100%;
             margin-top: 10px;
-            margin-bottom: 10px;
-            width: 250px;
-            border-radius: 4px;
-            border: 1px solid #98724B;
-            display: inline-block;
-            margin-left: 10px;
-            font-family: 'Poppins', sans-serif;
         }
 
-        @media (max-width: 768px) {
-            ul {
-                width: 100%;
-                height: auto;
-                position: static;
-            }
-
-            .RightSide {
-                margin-left: 0;
-                padding: 10px;
-            }
-
-            table {
-                font-size: 14px;
-            }
-
-            .search-input {
-                width: 100%;
-                margin-top: 10px;
-            }
+        .action-buttons {
+            flex-direction: column;
+            gap: 3px;
         }
-    </style>
+
+        .button {
+            padding: 6px 10px;
+            font-size: 12px;
+        }
+    }
+</style>
 </head>
 <body>
 
@@ -278,26 +296,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['insert'])) {
             if ($result && $result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     echo "<tr>";
-                    echo "<td>" . htmlspecialchars($row['billingid']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['firstname']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['lastname']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['contact']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['country']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['address']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['town']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['province']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['zipcode']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['email']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['totalprice']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['productname']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['quantity']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['BillingID']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['FirstName']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['LastName']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['Contact']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['Country']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['Address']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['Town']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['Province']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['ZipCode']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['Email']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['TotalPrice']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['ProductName']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['Quantity']) . "</td>";
                     echo "<td>" . htmlspecialchars($session_id) . "</td>"; // Displaying the Session ID
-                    echo "<td style='text-align:center;'>
-                        <a href='viewBilling.php?id=" . $row['billingid'] . "' class='button button1'>View</a>
-                        <a href='updateBilling.php?id=" . $row['billingid'] . "' class='button button1'>Update</a>
-                        <a href='Billing.php?delete=" . $row['billingid'] . "' class='button button1' onclick='return confirm(\"Are you sure you want to delete this record?\")'>Delete</a>
-                    </td>";
-                    echo "</tr>";
+                    echo "<td>
+    <div class='action-buttons'>
+        <a href='viewBilling.php?id=" . $row['BillingID'] . "' class='button button1'>View</a>
+        <a href='updateBilling.php?id=" . $row['BillingID'] . "' class='button button1'>Update</a>
+        <a href='Billing.php?delete=" . $row['BillingID'] . "' class='button button1' onclick='return confirm(\"Are you sure you want to delete this record?\")'>Delete</a>
+    </div>
+</td>";
                 }
             } else {
                 echo "<tr><td colspan='15' style='text-align:center;'>No records found.</td></tr>";
