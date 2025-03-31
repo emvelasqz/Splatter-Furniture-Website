@@ -5,7 +5,7 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-$sql = "SELECT inventory_id FROM inventory WHERE name = 'Dawson Sofa';";
+$sql = "SELECT inventory_id FROM inventory WHERE name = 'Austen Counter Stool';";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -89,19 +89,19 @@ $conn->close();
                 <p>Whether you're curling up with a good book or entertaining guests, the Dawson Sofa provides the perfect spot to unwind. Its sturdy construction and high-quality materials ensure lasting comfort and support for years to come.</p>
             </div>
             <div class="purchase-actions">
-    <form action="cart.php" method="post" style="display: flex; align-items: center;">
-        <div class="quantity-selector" style="display: flex; align-items: center; border: 1px solid #ccc; border-radius: 5px; overflow: hidden; margin-right: 10px;">
-            <button type="button" class="quantity-btn decrease" style=" border: none; padding: 5px 10px; cursor: pointer; font-size: 16px;">−</button>
-            <input type="text" class="quantity-input" name="quantity" value="1" style="width: 50px; text-align: center; border: none; outline: none;">
-            <button type="button" class="quantity-btn increase" style=" border: none; padding: 5px 10px; cursor: pointer; font-size: 16px;">+</button>
-        </div>
-        <input type="hidden" name="product_id" value="6">
-        <input type="hidden" name="product_name" value="Dawson Sofa>
-        <input type="hidden" name="product_price" value="13000">
-        <input type="hidden" name="product_image" value="product5.jpg">
-        <button type="submit" class="add-to-cart-btn" onclick="showFlashMessage()" style="margin-left: 10px; background-color: #5E4736; color: white; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px;">Add to Cart</button>
-    </form>
-</div>
+                <form action="cart.php" method="post" style="display: flex; align-items: center;">
+                    <div class="quantity-selector" style="display: flex; align-items: center; border: 1px solid #ccc; border-radius: 5px; overflow: hidden; margin-right: 10px;">
+                        <button type="button" class="quantity-btn decrease" style="border: none; padding: 5px 10px; cursor: pointer; font-size: 16px;">−</button>
+                        <input type="text" class="quantity-input" name="quantity" value="1" style="width: 50px; text-align: center; border: none; outline: none;">
+                        <button type="button" class="quantity-btn increase" style="border: none; padding: 5px 10px; cursor: pointer; font-size: 16px;">+</button>
+                    </div>
+                    <input type="hidden" name="product_id" value="285">
+                    <input type="hidden" name="product_name" value="Dawson Sofa">
+                    <input type="hidden" name="product_price" value="13000">
+                    <input type="hidden" name="product_image" value="product5.jpg">
+                    <button type="submit" class="add-to-cart-btn" onclick="showFlashMessage()" style="margin-left: 10px; background-color: #5E4736; color: white; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px;">Add to Cart</button>
+                </form>
+            </div>
             <p class="shipping-info">Free 3-5 day shipping • Tool-free assembly • 30-day trial</p>
         </div>
         <div class="main-product-image">
@@ -206,7 +206,7 @@ $conn->close();
     <div class="footer-brand">
     <h2 class="windsong-logo">Splatter</h2>
             <p>Crafting comfort, one piece at a time.</p>
-            <p>1st Street, Ballbogo, Angeles City, Pampanga, 2008, Philippines</p>
+            <p>1st Street, Balibago, Angeles City, Pampanga, 2008, Philippines</p>
 
         </div>
         <div class="footer-links">
