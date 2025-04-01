@@ -1,5 +1,4 @@
 <?php
-// Connect to the database
 $host = 'localhost';
 $user = 'root';
 $pass = '';
@@ -10,21 +9,17 @@ if ($mysqli->connect_error) {
     die("Connection failed: " . $mysqli->connect_error);
 }
 
-// Handle form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST['name'];
     $stocks = $_POST['stocks'];
     $supplier = $_POST['supplier'];
     $price = $_POST['price'];
-    $category = $_POST['category'];  // Get category from the form
+    $category = $_POST['category'];
 
-    // Prepare the SQL query
     $sql = "INSERT INTO inventory (name, stocks, supplier, price, category) VALUES (?, ?, ?, ?, ?)";
     $stmt = $mysqli->prepare($sql);
-    // Corrected the bind_param to account for all five parameters
-    $stmt->bind_param("sisss", $name, $stocks, $supplier, $price, $category); // 'sisss' for (string, integer, string, double, string)
+    $stmt->bind_param("sisss", $name, $stocks, $supplier, $price, $category);
 
-    // Execute the query and handle success or failure
     if ($stmt->execute()) {
         echo "<script>alert('Item added successfully!'); window.location.href='inventory.php';</script>";
     } else {
