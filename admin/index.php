@@ -71,7 +71,6 @@ body {
 .content {
     text-align: center;
     color: white;
-    /* Remove margin-top: auto to keep content centered */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -86,7 +85,7 @@ body {
     color: white;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     text-align: center;
-    width: 100%; /* Ensure full width for centering */
+    width: 100%;
 }
 
 .content p {
@@ -181,7 +180,6 @@ body {
             <h1>Splater</h1>
             <p>You are currently on the admin dashboard</p>
         </div>
-
 
         <footer class="footer">
             &copy; 2025 HAU-STORE CORPORATION. All Rights Reserved.
