@@ -1,8 +1,6 @@
 <?php
-// Start the session
 session_start();
 
-// Connect to the database
 $host = 'localhost';
 $user = 'root';
 $pass = '';
@@ -13,11 +11,9 @@ if ($mysqli->connect_error) {
     die("Connection failed: " . $mysqli->connect_error);
 }
 
-// Get the BillingID from the query parameter
 $billingID = $_GET['id'] ?? 0;
 
-// Fetch the existing data to populate the form
-$billing = null; // Ensure $billing is defined before the query
+$billing = null;
 
 if ($billingID > 0) {
     $sql = "SELECT * FROM billing WHERE billingid = ?";
@@ -25,10 +21,9 @@ if ($billingID > 0) {
     $stmt->bind_param('i', $billingID);
     $stmt->execute();
     $result = $stmt->get_result();
-    $billing = $result->fetch_assoc(); // Store the result in $billing
+    $billing = $result->fetch_assoc();
 }
 
-// Handle the form submission to update the record
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $billing) {
     $firstName = $_POST['firstname'];
     $lastName = $_POST['lastname'];
@@ -39,20 +34,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $billing) {
     $province = $_POST['province'];
     $zipCode = $_POST['zipcode'];
     $email = $_POST['email'];
-    $productName = $_POST['productname']; // Assuming you want to include this
-    $quantity = $_POST['quantity']; // Assuming you want to include this
+    $productName = $_POST['productname'];
+    $quantity = $_POST['quantity'];
 
     $updateSQL = "UPDATE billing SET firstname=?, lastname=?, contact=?, country=?, address=?, town=?, province=?, zipcode=?, email=?, productname=?, quantity=? WHERE billing=?";
     $stmt = $mysqli->prepare($updateSQL);
     $stmt->bind_param('sssssssssssi', $firstName, $lastName, $contact, $country, $address, $town, $province, $zipCode, $email, $productName, $quantity, $billingID);
     $stmt->execute();
 
-    // Set success message in session
     $_SESSION['success_message'] = 'Billing details updated successfully!';
 
-    // Redirect to Billing page
     header("Location: Billing.php");
-    exit(); // Ensure no further code is executed after the redirect
+    exit();
 }
 ?>
 
@@ -62,7 +55,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $billing) {
     <link rel="stylesheet" href="header.css">
     <title>Update Billing Details</title>
  <style>
-    /* Overall Body Styling */
     body {
         font-family: 'Poppins', sans-serif;
         background-color: #f8f3ed;
@@ -74,7 +66,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $billing) {
         min-height: 100vh;
     }
 
-    /* Sidebar Navigation Styling */
     ul {
         list-style-type: none;
         margin: 0;
@@ -101,7 +92,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $billing) {
         background-color: #B09D89;
     }
 
-    /* RightSide Content Styling */
     .RightSide {
         margin-left: 240px;
         padding: 20px;
@@ -110,7 +100,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $billing) {
         box-sizing: border-box;
     }
 
-    /* Header Styling */
     h1 {
         color: #5a4032;
         font-family: 'Poppins', sans-serif;
@@ -118,7 +107,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $billing) {
         margin-bottom: 20px;
     }
 
-    /* Form Styling */
     form {
         background-color: #ffffff;
         border-radius: 8px;
@@ -174,7 +162,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $billing) {
         background-color: #8F7358;
     }
 
-    /* Table Styling */
     .InfoTable {
         margin-top: 20px;
         width: 100%;
@@ -210,7 +197,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $billing) {
         background-color: #e6dfd4;
     }
 
-    /* Responsive Styling */
     @media (max-width: 768px) {
         ul {
             width: 100%;
