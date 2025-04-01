@@ -1,5 +1,4 @@
 <?php
-// Connect to the database
 $host = 'localhost';
 $user = 'root';
 $pass = '';
@@ -10,7 +9,6 @@ if ($mysqli->connect_error) {
     die("Connection failed: " . $mysqli->connect_error);
 }
 
-// Handle the Delete Item Logic
 if (isset($_GET['delete_id'])) {
     $delete_id = $_GET['delete_id'];
     $delete_sql = "DELETE FROM inventory WHERE inventory_id = ?";
@@ -24,16 +22,14 @@ if (isset($_GET['delete_id'])) {
     $stmt->close();
 }
 
-// Handle the Search Functionality
 $searchQuery = '';
 if (isset($_GET['search']) && !empty($_GET['search'])) {
     $searchQuery = $_GET['search'];
     $sql = "SELECT * FROM inventory WHERE name LIKE ? OR category LIKE ?";
     $stmt = $mysqli->prepare($sql);
-    $searchTerm = "%" . $searchQuery . "%"; // Use wildcard to match partial terms
+    $searchTerm = "%" . $searchQuery . "%";
     $stmt->bind_param("ss", $searchTerm, $searchTerm);
 } else {
-    // If no search query, fetch all items
     $sql = "SELECT * FROM inventory";
     $stmt = $mysqli->prepare($sql);
 }
@@ -220,15 +216,10 @@ $result = $stmt->get_result();
         <li><a href="Accounts.php">Accounts</a></li>
         <li><a href="CustomersCart.php">CustomerCart</a></li>
     </ul>
-        <!-- Search Bar -->
         <div class="RightSide">
     <h1>Admin Dashboard</h1>
-    <!-- Container for Add Item and Search -->
     <div class="action-buttons">
-        <!-- Add Item Button -->
         <button class="button button1" onclick="window.location.href='add_item.php'">Add Item</button>
-        
-        <!-- Search Bar -->
         <div class="search-container">
             <form method="GET" action="inventory.php" style="display: flex; align-items: center; gap: 10px;">
                 <input class="search-input" type="text" name="search" placeholder="Search..." value="<?php echo htmlspecialchars($searchQuery); ?>">
@@ -237,8 +228,6 @@ $result = $stmt->get_result();
         </div>
     </div>
 
-
-        <!-- Inventory Table -->
         <div class="InfoTable">
             <table>
                 <tr>
