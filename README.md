@@ -24,44 +24,41 @@ USE hau_store;
 
 
 **Creating the Tables**
-Billing Table:
 
+Billing Table:
 CREATE TABLE billing (
-    BillingID INT(11) NOT NULL AUTO_INCREMENT,
-    FirstName VARCHAR(50) NOT NULL,
-    LastName VARCHAR(50) NOT NULL,
-    Contact VARCHAR(15) NOT NULL,
-    Country VARCHAR(50) NOT NULL,
-    Address VARCHAR(150) NOT NULL,
-    Province VARCHAR(50) NOT NULL,
-    ZipCode VARCHAR(10) NOT NULL,
-    Email VARCHAR(100) NOT NULL,
-    SessionID VARCHAR(255) NOT NULL,
-    TotalPrice DECIMAL(10,2) NOT NULL DEFAULT 0.00,
-    Town VARCHAR(255) DEFAULT NULL,
-    ProductName VARCHAR(255) DEFAULT NULL,
-    Quantity INT(11) DEFAULT NULL,
-    PRIMARY KEY (BillingID)
+    billingid INT(11) NOT NULL AUTO_INCREMENT,
+    firstname VARCHAR(50) NOT NULL,
+    lastname VARCHAR(50) NOT NULL,
+    contact VARCHAR(15) NOT NULL,
+    country VARCHAR(50) NOT NULL,
+    address VARCHAR(150) NOT NULL,
+    province VARCHAR(50) NOT NULL,
+    zipcode VARCHAR(10) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    sessionid VARCHAR(255) NOT NULL,
+    totalprice DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+    town VARCHAR(255) DEFAULT NULL,
+    productname VARCHAR(255) DEFAULT NULL,
+    quantity INT(11) DEFAULT NULL,
+    PRIMARY KEY (billingid)
 );
 
-
 Cart Items Table:
-
 CREATE TABLE cartitems (
-    CartItemID INT(11) NOT NULL AUTO_INCREMENT,
-    SessionID VARCHAR(255) NOT NULL,
-    ProductID INT(11) NOT NULL,
-    ProductName VARCHAR(255) NOT NULL,
-    Quantity INT(11) NOT NULL,
-    Price DECIMAL(10,2) NOT NULL,
-    ImagePath VARCHAR(255) DEFAULT NULL,
-    Subtotal DECIMAL(10,2) AS (Quantity * Price) STORED,
+    cartitemid INT(11) NOT NULL AUTO_INCREMENT,
+    sessionid VARCHAR(255) NOT NULL,
+    productid INT(11) NOT NULL,
+    productname VARCHAR(255) NOT NULL,
+    quantity INT(11) NOT NULL,
+    price DECIMAL(10,2) NOT NULL,
+    imagepath VARCHAR(255) DEFAULT NULL,
+    subtotal DECIMAL(10,2) AS (quantity * price) STORED,
     delivery_date VARCHAR(10) DEFAULT NULL,
-    PRIMARY KEY (CartItemID)
+    PRIMARY KEY (cartitemid)
 );
 
 Inventory Table:
-
 CREATE TABLE inventory (
     inventory_id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
     name VARCHAR(100) NOT NULL,
@@ -74,19 +71,17 @@ CREATE TABLE inventory (
 );
 
 Signup Table:
-
 CREATE TABLE signup (
-    SignupID INT(11) NOT NULL AUTO_INCREMENT,
-    FirstName VARCHAR(50) NOT NULL,
-    LastName VARCHAR(50) NOT NULL,
-    Email VARCHAR(100) NOT NULL UNIQUE,
-    Password VARCHAR(100) NOT NULL,
-    ContactNumber VARCHAR(15) NOT NULL,
-    PRIMARY KEY (SignupID)
+    signupid INT(11) NOT NULL AUTO_INCREMENT,
+    firstname VARCHAR(50) NOT NULL,
+    lastname VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(100) NOT NULL,
+    contactnumber VARCHAR(15) NOT NULL,
+    PRIMARY KEY (signupid)
 );
 
 Inserting Data into Inventory Table:
-
 INSERT INTO inventory 
     (name, price, stocks, supplier, category, image) 
 VALUES
