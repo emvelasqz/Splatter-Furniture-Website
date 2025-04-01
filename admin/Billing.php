@@ -1,7 +1,6 @@
 <?php
-session_start(); // Start the session
+session_start();
 
-// Connect to the database
 $host = 'localhost';
 $user = 'root';
 $pass = '';
@@ -12,9 +11,8 @@ if ($mysqli->connect_error) {
     die("Connection failed: " . $mysqli->connect_error);
 }
 
-// Fetch the session ID from the CartItems table
 $session_id = session_id();
-$session_query = "SELECT sessionid FROM cartitems WHERE sessionid = ?";
+$session_query = "SELECT SessionID FROM CartItems WHERE SessionID = ?";
 $stmt = $mysqli->prepare($session_query);
 $stmt->bind_param('s', $session_id);
 $stmt->execute();
@@ -24,11 +22,10 @@ if ($stmt->num_rows > 0) {
     $stmt->bind_result($session_id);
     $stmt->fetch();
 } else {
-    $session_id = 'No active session'; // Handle case where no session is found
+    $session_id = 'No active session';
 }
 $stmt->close();
 
-// Search functionality
 $search = '';
 if (isset($_GET['search'])) {
     $search = $_GET['search'];
@@ -43,17 +40,15 @@ if (isset($_GET['search'])) {
     $result = $mysqli->query($sql);
 }
 
-// Handle deletion
 if (isset($_GET['delete'])) {
     $billingID = $_GET['delete'];
     $deleteSQL = "DELETE FROM billing WHERE BillingID = ?";
     $stmt = $mysqli->prepare($deleteSQL);
     $stmt->bind_param('i', $billingID);
     $stmt->execute();
-    header("Location: Billing.php"); // Redirect to reload the page after deletion
+    header("Location: Billing.php");
 }
 
-// Handling Data Insertion:
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['insert'])) {
     $firstName = $_POST['firstName'];
     $lastName = $_POST['lastName'];
@@ -64,18 +59,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['insert'])) {
     $province = $_POST['province'];
     $zipCode = $_POST['zipCode'];
     $email = $_POST['email'];
-    $totalPrice = $_POST['totalPrice']; // Assuming you have a total price input
-    $productName = $_POST['productName']; // New field for product name
-    $quantity = $_POST['quantity']; // New field for quantity
+    $totalPrice = $_POST['totalPrice'];
+    $productName = $_POST['productName'];
+    $quantity = $_POST['quantity'];
 
-    // Insert the data into the Billing table
     $sql = "INSERT INTO billing (FirstName, LastName, Contact, Country, Address, Town, Province, ZipCode, Email, TotalPrice, ProductName, Quantity) 
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = $mysqli->prepare($sql);
     $stmt->bind_param('ssssssssdssd', $firstName, $lastName, $contact, $country, $address, $town, $province, $zipCode, $email, $totalPrice, $productName, $quantity);
     $stmt->execute();
 
-    // Redirect to reload the page
     header("Location: Billing.php");
     exit;
 }
@@ -289,7 +282,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['insert'])) {
                 <th>Total Price</th>
                 <th>Product Name</th>
                 <th>Quantity</th>
-                <th>Session ID</th> <!-- New column for Session ID -->
+                <th>Session ID</th>
                 <th>Actions</th>
             </tr>
             <?php
@@ -309,7 +302,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['insert'])) {
                     echo "<td>" . htmlspecialchars($row['TotalPrice']) . "</td>";
                     echo "<td>" . htmlspecialchars($row['ProductName']) . "</td>";
                     echo "<td>" . htmlspecialchars($row['Quantity']) . "</td>";
-                    echo "<td>" . htmlspecialchars($session_id) . "</td>"; // Displaying the Session ID
+                    echo "<td>" . htmlspecialchars($session_id) . "</td>"; 
                     echo "<td>
     <div class='action-buttons'>
         <a href='viewBilling.php?id=" . $row['BillingID'] . "' class='button button1'>View</a>
