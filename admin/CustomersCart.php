@@ -1,8 +1,6 @@
 <?php
-// Start the session
 session_start();
 
-// Connect to the database
 $host = 'localhost';
 $dbname = 'hau_store';
 $username = 'root';
@@ -166,7 +164,6 @@ $cart_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
         font-family: 'Poppins', sans-serif;
     }
 
-    /* Total price styling */
     h3 {
         color: #5a4032;
         font-family: 'Poppins', sans-serif;
@@ -209,7 +206,7 @@ $cart_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <th>Price</th>
                         <th>Quantity</th>
                         <th>Total</th>
-                        <th>Session ID</th> <!-- Added Session ID header -->
+                        <th>Session ID</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -224,7 +221,7 @@ $cart_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                     <input type="number" value="<?= htmlspecialchars($item['quantity']) ?>" min="1" readonly>
                                 </td>
                                 <td>₱<?= number_format($item['price'] * $item['quantity'], 2) ?></td>
-                                <td><?= htmlspecialchars($item['sessionid']) ?></td> <!-- Displaying Session ID -->
+                                <td><?= htmlspecialchars($item['sessionid']) ?></td>
                                 <td>
                                     <form method="POST" style="display: inline;">
                                         <input type="hidden" name="product_id" value="<?= $item['ProductID'] ?>">
@@ -235,7 +232,7 @@ $cart_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <?php endforeach; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="7" style="text-align: center;">Your cart is empty.</td> <!-- Adjusted colspan -->
+                            <td colspan="7" style="text-align: center;">Your cart is empty.</td>
                         </tr>
                     <?php endif; ?>
                 </tbody>
@@ -253,5 +250,5 @@ $cart_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </html>
 
 <?php
-$conn = null; // Close the database connection
+$conn = null;
 ?>
