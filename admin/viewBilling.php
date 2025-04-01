@@ -1,5 +1,4 @@
 <?php
-// Connect to the database
 $host = 'localhost';
 $user = 'root';
 $pass = '';
@@ -32,7 +31,7 @@ if ($billingID > 0) {
     <link rel="stylesheet" href="header.css">
     <title>View Billing Details</title>
     <style>
-        /* Styling for the overall page layout */
+
 bbody {
     margin: 0;
     font-family: 'Poppins', sans-serif;
