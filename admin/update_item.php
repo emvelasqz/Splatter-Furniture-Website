@@ -1,5 +1,4 @@
 <?php
-// Connect to the database
 $host = 'localhost';
 $user = 'root';
 $pass = '';
@@ -10,11 +9,9 @@ if ($mysqli->connect_error) {
     die("Connection failed: " . $mysqli->connect_error);
 }
 
-// Get the inventory item id from the query string
 if (isset($_GET['inventory_id'])) {
     $inventory_id = $_GET['inventory_id'];
 
-    // Fetch the current data for the item
     $sql = "SELECT * FROM inventory WHERE inventory_id = ?";
     $stmt = $mysqli->prepare($sql);
     $stmt->bind_param("i", $inventory_id);
@@ -22,7 +19,6 @@ if (isset($_GET['inventory_id'])) {
     $result = $stmt->get_result();
     $item = $result->fetch_assoc();
 
-    // Handle form submission to update item
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $name = $_POST['name'];
         $stocks = $_POST['stocks'];
@@ -30,7 +26,6 @@ if (isset($_GET['inventory_id'])) {
         $price = $_POST['price'];
         $category = $_POST['category'];
 
-        // Update the item in the database
         $update_sql = "UPDATE inventory SET name = ?, stocks = ?, supplier = ?, price = ?, category = ? WHERE inventory_id = ?";
         $update_stmt = $mysqli->prepare($update_sql);
         $update_stmt->bind_param("sisdsi", $name, $stocks, $supplier, $price, $category, $inventory_id);
@@ -57,7 +52,7 @@ if (isset($_GET['inventory_id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Inventory Item</title>
     <style>
-        /* Global Styles */
+
 body {
     font-family: 'Poppins', sans-serif;
     background-color: #f8f3ed;
@@ -75,14 +70,12 @@ body {
     box-shadow: 0 4px 8px rgba(94, 71, 54, 0.1);
 }
 
-/* Typography */
 h3 {
     text-align: center;
     color: #5a4032;
     font-family: 'Poppins', sans-serif;
 }
 
-/* Form Styling */
 form {
     display: flex;
     flex-direction: column;
@@ -104,7 +97,6 @@ input, select {
     font-family: 'Poppins', sans-serif;
 }
 
-/* Button Styles */
 button {
     padding: 12px 20px;
     font-size: 16px;
@@ -132,7 +124,6 @@ button:hover {
     color: #5E4736;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
     .container {
         width: 90%;
