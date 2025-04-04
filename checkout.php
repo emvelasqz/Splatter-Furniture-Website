@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place-order'])) {
     if (empty($first_name) || empty($last_name) || empty($country) || empty($street_address) || empty($town_city) || empty($province) || empty($zip_code) || empty($phone) || empty($email)) {
         echo "<h3 style='color: red;'>Please fill in all required fields.</h3>";
     } else {
-        $sql_billing = "INSERT INTO Billing (FirstName, LastName, Country, Address, Town, Province, ZipCode, Contact, Email, SessionID, TotalPrice, ProductName, Quantity)
+        $sql_billing = "INSERT INTO Billing (firstname, lastname, country, address, town, province, zipcode, contact, email, sessionid, totalprice, productname, quantity)
                         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql_billing);
 
