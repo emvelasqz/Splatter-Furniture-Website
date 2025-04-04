@@ -3,8 +3,8 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 $host = 'localhost';
-$user = 'root'; 
-$pass = '';     
+$user = 'splatter'; 
+$pass = 'splatter';     
 $db   = 'hau_store'; 
 
 $mysqli = new mysqli($host, $user, $pass, $db);
