@@ -5,8 +5,8 @@ ini_set('display_errors', 1);
 
 // Database connection details
 $servername = "localhost";
-$username = "splatter";
-$password = "splatter";
+$username = "root";
+$password = "";
 $dbname = "hau_store";
 
 // Create connection
