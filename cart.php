@@ -4,8 +4,8 @@ session_start();
 // Database connection
 $host = 'localhost'; 
 $db = 'hau_store'; 
-$user = 'root'; 
-$pass = ''; 
+$user = 'splatter'; 
+$pass = 'splatter'; 
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$db", $user, $pass);
