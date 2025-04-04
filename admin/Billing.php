@@ -2,8 +2,8 @@
 session_start();
 
 $host = 'localhost';
-$user = 'splatter';
-$pass = 'splatter';
+$user = 'root';
+$pass = '';
 $db   = 'hau_store';
 
 $mysqli = new mysqli($host, $user, $pass, $db);
