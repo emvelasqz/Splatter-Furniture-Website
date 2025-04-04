@@ -4,8 +4,8 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 $host = 'localhost';
-$user = 'splatter';
-$pass = 'splatter';
+$user = 'root';
+$pass = '';
 $db   = 'hau_store';
 
 $mysqli = new mysqli($host, $user, $pass, $db);
