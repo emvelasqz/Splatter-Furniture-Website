@@ -3,8 +3,8 @@ session_start();
 
 $host = 'localhost';
 $dbname = 'hau_store';
-$username = 'root';
-$password = '';
+$username = 'splatter';
+$password = 'splatter';
 
 try {
     $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
