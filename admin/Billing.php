@@ -12,7 +12,7 @@ if ($mysqli->connect_error) {
 }
 
 $session_id = session_id();
-$session_query = "SELECT SessionID FROM CartItems WHERE SessionID = ?";
+$session_query = "SELECT sessionid FROM cartitems WHERE sessionid = ?";
 $stmt = $mysqli->prepare($session_query);
 $stmt->bind_param('s', $session_id);
 $stmt->execute();
@@ -29,7 +29,7 @@ $stmt->close();
 $search = '';
 if (isset($_GET['search'])) {
     $search = $_GET['search'];
-    $sql = "SELECT * FROM billing WHERE FirstName LIKE ? OR LastName LIKE ? OR Contact LIKE ? OR Country LIKE ? OR Address LIKE ? OR Town LIKE ? OR Province LIKE ? OR ZipCode LIKE ? OR Email LIKE ?";
+    $sql = "SELECT * FROM billing WHERE firstname LIKE ? OR lastname LIKE ? OR contact LIKE ? OR country LIKE ? OR address LIKE ? OR town LIKE ? OR province LIKE ? OR zipCode LIKE ? OR email LIKE ?";
     $stmt = $mysqli->prepare($sql);
     $search_term = '%' . $search . '%';
     $stmt->bind_param('sssssssss', $search_term, $search_term, $search_term, $search_term, $search_term, $search_term, $search_term, $search_term, $search_term);
@@ -50,23 +50,23 @@ if (isset($_GET['delete'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['insert'])) {
-    $firstName = $_POST['firstName'];
-    $lastName = $_POST['lastName'];
+    $firstname = $_POST['firstname'];
+    $lastname = $_POST['lastname'];
     $contact = $_POST['contact'];
     $country = $_POST['country'];
     $address = $_POST['address'];
     $town = $_POST['town'];
     $province = $_POST['province'];
-    $zipCode = $_POST['zipCode'];
+    $zipcode = $_POST['zipcode'];
     $email = $_POST['email'];
-    $totalPrice = $_POST['totalPrice'];
-    $productName = $_POST['productName'];
+    $totalprice = $_POST['totalprice'];
+    $productname = $_POST['productname'];
     $quantity = $_POST['quantity'];
 
-    $sql = "INSERT INTO billing (FirstName, LastName, Contact, Country, Address, Town, Province, ZipCode, Email, TotalPrice, ProductName, Quantity) 
+    $sql = "INSERT INTO billing (firstname, lastname, contact, country, address, town, province, zipcode, email, totalprice, productname, quantity) 
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = $mysqli->prepare($sql);
-    $stmt->bind_param('ssssssssdssd', $firstName, $lastName, $contact, $country, $address, $town, $province, $zipCode, $email, $totalPrice, $productName, $quantity);
+    $stmt->bind_param('ssssssssdssd', $firstname, $lastname, $contact, $country, $address, $town, $province, $zipcode, $email, $totalprice, $productname, $quantity);
     $stmt->execute();
 
     header("Location: Billing.php");
