@@ -32,14 +32,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $billing) {
     $address = $_POST['address'];
     $town = $_POST['town'];
     $province = $_POST['province'];
-    $zipCode = $_POST['zipcode'];
+    $zipcode = $_POST['zipcode'];
     $email = $_POST['email'];
-    $productName = $_POST['productname'];
+    $productname = $_POST['productname'];
     $quantity = $_POST['quantity'];
 
     $updateSQL = "UPDATE billing SET firstname=?, lastname=?, contact=?, country=?, address=?, town=?, province=?, zipcode=?, email=?, productname=?, quantity=? WHERE billing=?";
     $stmt = $mysqli->prepare($updateSQL);
-    $stmt->bind_param('sssssssssssi', $firstName, $lastName, $contact, $country, $address, $town, $province, $zipCode, $email, $productName, $quantity, $billingID);
+    $stmt->bind_param('sssssssssssi', $firstname, $lastname, $contact, $country, $address, $town, $province, $zipcode, $email, $productname, $quantity, $billingid);
     $stmt->execute();
 
     $_SESSION['success_message'] = 'Billing details updated successfully!';
