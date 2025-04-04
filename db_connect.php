@@ -1,8 +1,8 @@
 <?php
 // Database connection configuration
 $servername = "localhost";     // Server hostname 
-$username = "splatter";             // Database username
-$password = "splatter";                 // Database password 
+$username = "root";             // Database username
+$password = "";                 // Database password 
 $database = "hau_store";        // Database name
 
 // Create a mysqli connection
