@@ -4,8 +4,8 @@ session_start();
 // Database connection
 $host = 'localhost'; 
 $db = 'hau_store'; 
-$user = 'splatter'; 
-$pass = 'splatter'; 
+$user = 'root'; 
+$pass = ''; 
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$db", $user, $pass);
@@ -72,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkout'])) {
     $session_id = session_id(); // Get the current session ID
 
     foreach ($_SESSION['cart'] as $product_id => $item) {
-        $stmt = $pdo->prepare("INSERT INTO cartitems (sessionid, productid, productname, quantity, price, imagepath) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt = $pdo->prepare("INSERT INTO CartItems (SessionID, ProductID, ProductName, Quantity, Price, ImagePath) VALUES (?, ?, ?, ?, ?, ?)");
         $stmt->execute([$session_id, $product_id, $item['name'], $item['quantity'], $item['price'], $item['image']]);
     }
 
@@ -560,7 +560,7 @@ $total = $subtotal - $discount - $coupon_discount;
         <div class="footer-brand">
             <h2>Splatter</h2>
             <p>Crafting comfort, one piece at a time.</p>
-            <p>1st Street, Balibago, Angeles City, Pampanga, 2008, Philippines</p>
+            <p>1st Street, Ballbogo, Angeles City, Pampanga, 2008, Philippines</p>
         </div>
         <div class="footer-links">
             <table>
