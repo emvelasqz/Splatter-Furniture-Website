@@ -11,7 +11,7 @@ if ($mysqli->connect_error) {
 
 if (isset($_GET['delete_id'])) {
     $delete_id = $_GET['delete_id'];
-    $delete_sql = "DELETE FROM signup WHERE signupid = ?";
+    $delete_sql = "DELETE FROM Signup WHERE SignupID = ?";
     $stmt = $mysqli->prepare($delete_sql);
     $stmt->bind_param('i', $delete_id);
     $stmt->execute();
@@ -22,14 +22,14 @@ if (isset($_GET['delete_id'])) {
 $search = '';
 if (isset($_GET['search'])) {
     $search = $_GET['search'];
-    $sql = "SELECT * FROM signup WHERE firstname LIKE ? OR lastname LIKE ? OR email LIKE ? OR contactnumber LIKE ?";
+    $sql = "SELECT * FROM Signup WHERE FirstName LIKE ? OR LastName LIKE ? OR Email LIKE ? OR ContactNumber LIKE ?";
     $stmt = $mysqli->prepare($sql);
     $search_term = '%' . $search . '%';
     $stmt->bind_param('ssss', $search_term, $search_term, $search_term, $search_term);
     $stmt->execute();
     $result = $stmt->get_result();
 } else {
-    $sql = "SELECT * FROM signup";
+    $sql = "SELECT * FROM Signup";
     $result = $mysqli->query($sql);
 }
 ?>
@@ -220,14 +220,14 @@ tr:hover {
               if ($result && $result->num_rows > 0) {
                   while ($row = $result->fetch_assoc()) {
                       echo "<tr>";
-                      echo "<td>" . htmlspecialchars($row['signupid']) . "</td>";
-                      echo "<td>" . htmlspecialchars($row['firstname']) . "</td>";
-                      echo "<td>" . htmlspecialchars($row['lastname']) . "</td>";
-                      echo "<td>" . htmlspecialchars($row['email']) . "</td>";
-                      echo "<td>" . htmlspecialchars($row['password']) . "</td>";
-                      echo "<td>" . htmlspecialchars($row['contactnumber']) . "</td>";
+                      echo "<td>" . htmlspecialchars($row['SignupID']) . "</td>";
+                      echo "<td>" . htmlspecialchars($row['FirstName']) . "</td>";
+                      echo "<td>" . htmlspecialchars($row['LastName']) . "</td>";
+                      echo "<td>" . htmlspecialchars($row['Email']) . "</td>";
+                      echo "<td>" . htmlspecialchars($row['Password']) . "</td>";
+                      echo "<td>" . htmlspecialchars($row['ContactNumber']) . "</td>";
                       echo "<td style='text-align:center;'>
-                              <a href='Accounts.php?delete_id=" . $row['signupid'] . "' onclick='return confirm(\"Are you sure you want to delete this record?\")'>
+                              <a href='Accounts.php?delete_id=" . $row['SignupID'] . "' onclick='return confirm(\"Are you sure you want to delete this record?\")'>
                                 <button class='button button1'>Delete</button>
                               </a>
                             </td>";
