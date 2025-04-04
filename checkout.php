@@ -2,8 +2,8 @@
 session_start();
 
 $servername = "localhost";
-$username = "root";
-$password = "";
+$username = "splatter";
+$password = "splatter";
 $dbname = "hau_store";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
